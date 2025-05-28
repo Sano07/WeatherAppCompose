@@ -2,6 +2,7 @@ package com.example.weatherappcompose.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,8 +20,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.weatherappcompose.R
 import com.example.weatherappcompose.ui.theme.CardColor
+import com.google.accompanist.pager.pagerTabIndicatorOffset
 
 @Preview(showBackground = true)
 @Composable
@@ -128,16 +133,29 @@ fun MainCardTemp() {
 
 }
 
+@Preview
 @Composable
 fun TabLayout() {
     val tabList = listOf("HOURS","DAYS")
+    val pagerState = rememberPagerState()
+    val tabIndex = pagerState.currentPage
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier.clip(RoundedCornerShape(5.dp))
+        modifier = Modifier
+            .padding(start = 5.dp, end = 5.dp)
+            .clip(RoundedCornerShape(5.dp))
     ) {
         TabRow(
-            selectedTabIndex = 0,
-            indicator = {},
+            selectedTabIndex = tabIndex,
+            indicator = { tabPositions ->
+                Box(
+                    Modifier
+                        .pagerTabIndicatorOffset(pagerState, tabPositions, pageIndexMapping = 0)
+                        .height(4.dp)
+                        .background(Color.Red)
+                )
+            },
             containerColor = CardColor
             ) {
             tabList.forEachIndexed{index, listValue ->
