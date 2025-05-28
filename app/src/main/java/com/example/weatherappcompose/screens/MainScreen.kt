@@ -16,10 +16,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -33,24 +36,16 @@ import com.example.weatherappcompose.ui.theme.CardColor
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreen() {
-
-    Image(
-        painter = painterResource(R.drawable.bastaigolovna),
-        contentDescription = "Wth",
-        modifier = Modifier.fillMaxSize(), alpha = 0.8f,
-        contentScale = ContentScale.Crop
-    )
+fun MainCardTemp() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
             .padding(WindowInsets.statusBars.asPaddingValues())
             .padding(5.dp),
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                contentColor = CardColor
+                containerColor = CardColor
             ),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 0.dp
@@ -85,7 +80,7 @@ fun MainScreen() {
                     color = Color.White
                 )
                 Text(
-                    text = "23°C",
+                    text = "24°C",
                     style = TextStyle(fontSize = 65.sp),
                     color = Color.White
                 )
@@ -127,6 +122,32 @@ fun MainScreen() {
 
                     }
                 }
+            }
+        }
+    }
+
+}
+
+@Composable
+fun TabLayout() {
+    val tabList = listOf("HOURS","DAYS")
+
+    Column(
+        modifier = Modifier.clip(RoundedCornerShape(5.dp))
+    ) {
+        TabRow(
+            selectedTabIndex = 0,
+            indicator = {},
+            containerColor = CardColor
+            ) {
+            tabList.forEachIndexed{index, listValue ->
+                Tab(
+                    selected = false,
+                    onClick = {},
+                    text = {
+                        Text(text = listValue)
+                    }
+                )
             }
         }
     }
