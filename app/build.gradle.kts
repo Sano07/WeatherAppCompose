@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.volley)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.androidx.activity.compose.v180)
@@ -50,6 +51,7 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.tools.core)
     debugImplementation(libs.ui.tooling)
     implementation(libs.coil.compose)
 
