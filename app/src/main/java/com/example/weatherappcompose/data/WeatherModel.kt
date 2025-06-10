@@ -1,5 +1,7 @@
 package com.example.weatherappcompose.data
 
+import androidx.compose.runtime.Composable
+
 data class WeatherModel(
     val city: String,
     val time: String,

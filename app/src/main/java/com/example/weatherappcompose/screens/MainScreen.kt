@@ -1,5 +1,6 @@
 package com.example.weatherappcompose.screens
 
+import android.app.LauncherActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ListItem
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -24,6 +27,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,9 +46,9 @@ import com.google.accompanist.pager.pagerTabIndicatorOffset
 import kotlinx.coroutines.launch
 import com.google.accompanist.pager.ExperimentalPagerApi
 
-@Preview(showBackground = true)
+
 @Composable
-fun MainCardTemp() {
+fun MainCardTemp(currentDay : MutableState<WeatherModel>) {
     Column(
         modifier = Modifier
             .padding(WindowInsets.statusBars.asPaddingValues())
@@ -69,13 +73,13 @@ fun MainCardTemp() {
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text = "20 June 2025 13:00",
+                        text = currentDay.value.time,
                         modifier = Modifier.padding(top = 8.dp, start = 8.dp),
                         style = TextStyle(fontSize = 15.sp),
                         color = Color.White
                     )
                     AsyncImage(
-                        model = "https://cdn.weatherapi.com/weather/64x64/day/113.png",
+                        model = "https:${currentDay.value.conditionIcon}",
                         contentDescription = "im_weather",
                         modifier = Modifier
                             .size(35.dp)
@@ -83,17 +87,17 @@ fun MainCardTemp() {
                     )
                 }
                 Text(
-                    text = "Soledar",
+                    text = currentDay.value.city,
                     style = TextStyle(fontSize = 24.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "24°C",
+                    text = currentDay.value.currentTemp.toFloat().toInt().toString() + "°C",
                     style = TextStyle(fontSize = 65.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "Sanny",
+                    text = currentDay.value.conditionText,
                     style = TextStyle(fontSize = 16.sp),
                     color = Color.White
                 )
@@ -114,7 +118,7 @@ fun MainCardTemp() {
 
                     }
                     Text(
-                        text = "23°C/17°C",
+                        text = "${currentDay.value.maxTemp.toFloat().toInt()}°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
                         style = TextStyle(fontSize = 16.sp),
                         color = Color.White
                     )
@@ -136,10 +140,9 @@ fun MainCardTemp() {
 
 }
 
-@Preview
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun TabLayout() {
+fun TabLayout(daysList: MutableState<List<WeatherModel>>) {
     val tabList = listOf("HOURS", "DAYS")
     val pagerState = rememberPagerState(
         pageCount = { tabList.size }
@@ -184,7 +187,9 @@ fun TabLayout() {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-
+                itemsIndexed(daysList.value) { _, item ->
+                    UIListItem(item)
+                }
             }
 
         }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -53,7 +54,7 @@ fun UIListItem(item: WeatherModel) {
                 style = TextStyle(fontSize = 25.sp)
             )
             AsyncImage(
-                model = "https${item.conditionIcon}",
+                model = "https:${item.conditionIcon}",
                 contentDescription = "im_weather2",
                 modifier = Modifier
                     .size(35.dp)
