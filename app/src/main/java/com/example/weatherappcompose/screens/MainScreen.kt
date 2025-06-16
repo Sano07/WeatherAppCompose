@@ -50,7 +50,7 @@ import org.json.JSONObject
 
 
 @Composable
-fun MainCardTemp(currentDay : MutableState<WeatherModel>) {
+fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit) {
     Column(
         modifier = Modifier
             .padding(WindowInsets.statusBars.asPaddingValues())
@@ -111,7 +111,9 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>) {
 
                     ) {
                     IconButton(
-                        onClick = {}
+                        onClick = {
+                            onClickSearch.invoke()
+                        }
                     )
                     {
                         Icon(
@@ -127,7 +129,9 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>) {
                         color = Color.White
                     )
                     IconButton(
-                        onClick = {}
+                        onClick = {
+                            onClickSync.invoke()
+                        }
                     )
                     {
                         Icon(
