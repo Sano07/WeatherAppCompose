@@ -50,7 +50,7 @@ fun UIListItem(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 3.dp)
+            .padding(top = 7.dp)
             .clickable {
                 if(item.hours.isEmpty()) return@clickable
                 currentDay.value = item
@@ -59,7 +59,7 @@ fun UIListItem(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
             containerColor = CardColor
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 0.dp
+            defaultElevation = 0.5.dp
         ),
         shape = RoundedCornerShape(5.dp)
     ) {
@@ -75,15 +75,15 @@ fun UIListItem(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
                 Text(text = item.conditionText, color = Color.White)
             }
             Text(
-                text = item.currentTemp.ifEmpty { "${item.maxTemp.toFloat().toInt()}/${item.minTemp.toFloat().toInt()}" },
+                text = item.currentTemp.ifEmpty {"${item.maxTemp.toFloat().toInt()}/${item.minTemp.toFloat().toInt()}"},
                 color = Color.White,
-                style = TextStyle(fontSize = 25.sp)
+                style = TextStyle(fontSize = 30.sp)
             )
             AsyncImage(
                 model = "https:${item.conditionIcon}",
                 contentDescription = "im_weather2",
                 modifier = Modifier
-                    .size(35.dp)
+                    .size(50.dp)
             )
         }
     }

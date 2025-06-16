@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                 Image(
                     painter = painterResource(R.drawable.bastaigolovna),
                     contentDescription = "Wth",
-                    modifier = Modifier.fillMaxSize(), alpha = 0.8f,
+                    modifier = Modifier.fillMaxSize(), alpha = 0.3f,
                     contentScale = ContentScale.Crop
                 )
                 Column {

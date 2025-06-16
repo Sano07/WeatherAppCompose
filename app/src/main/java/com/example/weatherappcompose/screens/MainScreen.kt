@@ -49,6 +49,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
+// основная , верхняя карточка в приложении
 @Composable
 fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit) {
     Column(
@@ -62,7 +63,7 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                 containerColor = CardColor
             ),
             elevation = CardDefaults.cardElevation(
-                defaultElevation = 0.dp
+                defaultElevation = 0.5.dp
             ),
             shape = RoundedCornerShape(10.dp),
         ) {
@@ -77,7 +78,7 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                     Text(
                         text = currentDay.value.time,
                         modifier = Modifier.padding(top = 12.dp, start = 12.dp),
-                        style = TextStyle(fontSize = 25.sp),
+                        style = TextStyle(fontSize = 16.sp),
                         color = Color.White
                     )
                     AsyncImage(
@@ -96,7 +97,7 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                 Text(
                     text = if(currentDay.value.currentTemp.isNotEmpty())
                         currentDay.value.currentTemp.toFloat().toInt().toString() + "°"
-                        else "${currentDay.value.maxTemp.toFloat().toInt()}°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
+                        else "${currentDay.value.maxTemp.toFloat().toInt()}°/${currentDay.value.minTemp.toFloat().toInt()}°",
                     style = TextStyle(fontSize = 70.sp),
                     color = Color.White
                 )
@@ -123,7 +124,7 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                         )
                     }
                     Text(
-                        text = "${currentDay.value.maxTemp.toFloat().toInt()}°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
+                        text = "${currentDay.value.maxTemp.toFloat().toInt()}°/${currentDay.value.minTemp.toFloat().toInt()}°",
                         style = TextStyle(fontSize = 25.sp),
                         color = Color.White
                     )
@@ -159,7 +160,7 @@ fun TabLayout(daysList: MutableState<List<WeatherModel>>, currentDay: MutableSta
 
     Column(
         modifier = Modifier
-            .padding(horizontal = 5.dp)
+            .padding(horizontal = 10.dp)
             .clip(RoundedCornerShape(5.dp))
     ) {
         TabRow(
