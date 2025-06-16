@@ -75,7 +75,7 @@ fun UIListItem(item: WeatherModel, currentDay: MutableState<WeatherModel>) {
                 Text(text = item.conditionText, color = Color.White)
             }
             Text(
-                text = item.currentTemp.ifEmpty { "${item.maxTemp}/${item.minTemp}" },
+                text = item.currentTemp.ifEmpty { "${item.maxTemp.toFloat().toInt()}/${item.minTemp.toFloat().toInt()}" },
                 color = Color.White,
                 style = TextStyle(fontSize = 25.sp)
             )

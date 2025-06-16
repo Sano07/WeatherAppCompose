@@ -76,39 +76,38 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                 ) {
                     Text(
                         text = currentDay.value.time,
-                        modifier = Modifier.padding(top = 8.dp, start = 8.dp),
-                        style = TextStyle(fontSize = 15.sp),
+                        modifier = Modifier.padding(top = 12.dp, start = 12.dp),
+                        style = TextStyle(fontSize = 25.sp),
                         color = Color.White
                     )
                     AsyncImage(
                         model = "https:${currentDay.value.conditionIcon}",
                         contentDescription = "im_weather",
                         modifier = Modifier
-                            .size(35.dp)
-                            .padding(top = 8.dp, end = 8.dp),
+                            .size(60.dp)
+                            .padding(top = 12.dp, end = 12.dp),
                     )
                 }
                 Text(
                     text = currentDay.value.city,
-                    style = TextStyle(fontSize = 24.sp),
+                    style = TextStyle(fontSize = 40.sp),
                     color = Color.White
                 )
                 Text(
                     text = if(currentDay.value.currentTemp.isNotEmpty())
-                        currentDay.value.currentTemp.toFloat().toInt().toString() + "°C"
+                        currentDay.value.currentTemp.toFloat().toInt().toString() + "°"
                         else "${currentDay.value.maxTemp.toFloat().toInt()}°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
-                    style = TextStyle(fontSize = 65.sp),
+                    style = TextStyle(fontSize = 70.sp),
                     color = Color.White
                 )
                 Text(
                     text = currentDay.value.conditionText,
-                    style = TextStyle(fontSize = 16.sp),
+                    style = TextStyle(fontSize = 25.sp),
                     color = Color.White
                 )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-
                     ) {
                     IconButton(
                         onClick = {
@@ -117,15 +116,15 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                     )
                     {
                         Icon(
+                            modifier = Modifier.size(25.dp),
                             painter = painterResource(R.drawable.ic_search),
                             contentDescription = "im_search",
                             tint = Color.White
                         )
-
                     }
                     Text(
                         text = "${currentDay.value.maxTemp.toFloat().toInt()}°C/${currentDay.value.minTemp.toFloat().toInt()}°C",
-                        style = TextStyle(fontSize = 16.sp),
+                        style = TextStyle(fontSize = 25.sp),
                         color = Color.White
                     )
                     IconButton(
@@ -135,6 +134,7 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                     )
                     {
                         Icon(
+                            modifier = Modifier.size(25.dp),
                             painter = painterResource(R.drawable.ic_refresh),
                             contentDescription = "im_refresh",
                             tint = Color.White
