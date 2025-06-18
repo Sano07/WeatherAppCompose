@@ -38,11 +38,12 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.9.23"
     }
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.volley)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
@@ -52,6 +53,7 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.tools.core)
+    implementation(libs.material)
     debugImplementation(libs.ui.tooling)
     implementation(libs.coil.compose)
 

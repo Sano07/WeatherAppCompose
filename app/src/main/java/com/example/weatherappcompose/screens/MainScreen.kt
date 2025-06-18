@@ -1,5 +1,6 @@
 package com.example.weatherappcompose.screens
 
+import android.annotation.SuppressLint
 import android.app.LauncherActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ListItem
 import androidx.compose.material3.Card
@@ -35,7 +38,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -52,6 +54,7 @@ import org.json.JSONObject
 // основная , верхняя карточка в приложении
 @Composable
 fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit) {
+
     Column(
         modifier = Modifier
             .padding(WindowInsets.statusBars.asPaddingValues())
