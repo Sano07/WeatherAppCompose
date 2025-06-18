@@ -11,6 +11,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,17 +63,13 @@ class MainActivity : ComponentActivity() {
                     )
                     )
                 }
+                LaunchedEffect(Unit) {
+                    getData("Kyiv", this@MainActivity, daysList, currDay)
+                }
+
                 if (dialogState.value) {
                     DialogSearch(dialogState, onSubmit = {getData(it, this, daysList, currDay)})
                 }
-                getData("Kyiv", this, daysList, currDay)
-                Image(
-                    painter = painterResource(R.drawable.bastaigolovna),
-                    contentDescription = "Wth",
-                    modifier = Modifier.fillMaxSize(), alpha = 0.3f,
-                    contentScale = ContentScale.Crop
-                )
-                Column {
                 Scaffold(
                     bottomBar = {
                         BottomNavigationLine(navController = navController)
@@ -82,9 +79,9 @@ class MainActivity : ComponentActivity() {
                     currentDay = currDay,
                     daysList = daysList,
                     onClickSync = { getData("Kyiv", this@MainActivity, daysList, currDay) },
-                    onClickSearch = { dialogState.value = true }
+                    onClickSearch = { dialogState.value = true },
+                    onClickFav = { Unit }
                 )
-                }
                 }
             }
         }

@@ -17,7 +17,7 @@ import com.example.weatherappcompose.data.WeatherModel
 
 @Composable
 fun BottomNavigationLine(navController: NavController) {
-    val listItems = listOf(BottomItem.FirstScreen, BottomItem.Screen2)
+    val listItems = listOf(BottomItem.FirstScreen, BottomItem.SecondScreen)
 
     BottomNavigation(backgroundColor = Color.White) {
       val backStackEntry by navController.currentBackStackEntryAsState()

@@ -1,26 +1,18 @@
 package com.example.weatherappcompose.screens
 
-import android.annotation.SuppressLint
-import android.app.LauncherActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ListItem
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -53,7 +45,7 @@ import org.json.JSONObject
 
 // основная , верхняя карточка в приложении
 @Composable
-fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit) {
+fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Unit, onClickSearch: () -> Unit, onClickFav: () -> Unit) {
 
     Column(
         modifier = Modifier
@@ -144,6 +136,19 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                             tint = Color.White
                         )
 
+                    }
+                    IconButton(
+                        onClick = {
+                            onClickFav.invoke()
+                        }
+                    )
+                    {
+                        Icon(
+                            modifier = Modifier.size(25.dp),
+                            painter = painterResource(R.drawable.ic_favorite),
+                            contentDescription = "im_fav",
+                            tint = Color.White
+                        )
                     }
                 }
             }

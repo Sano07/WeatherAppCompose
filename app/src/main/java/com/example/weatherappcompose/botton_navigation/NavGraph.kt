@@ -14,14 +14,15 @@ fun NavGraph(
     currentDay: MutableState<WeatherModel>,
     daysList: MutableState<List<WeatherModel>>,
     onClickSync: () -> Unit,
-    onClickSearch: () -> Unit
+    onClickSearch: () -> Unit,
+    onClickFav: () -> Unit
 ) {
     NavHost(navController = navController, startDestination = "first_screen") {
         composable("first_screen") {
-            FirstScreen(currentDay = currentDay, daysList = daysList, onClickSync = onClickSync, onClickSearch = onClickSearch)
+            FirstScreen(currentDay = currentDay, daysList = daysList, onClickSync = onClickSync, onClickSearch = onClickSearch, onClickFav = onClickFav )
         }
-        composable("screen_2") {
-            Screen2()
+        composable("second_screen") {
+            SecondScreen()
         }
     }
 }
