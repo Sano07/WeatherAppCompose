@@ -7,31 +7,21 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import androidx.privacysandbox.tools.core.model.Method
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.weatherappcompose.screens.MainCardTemp
-import com.example.weatherappcompose.screens.TabLayout
 import com.example.weatherappcompose.ui.theme.WeatherAppComposeTheme
 import com.android.volley.Request
 import com.example.weatherappcompose.botton_navigation.BottomNavigationLine
 import com.example.weatherappcompose.botton_navigation.NavGraph
+import com.example.weatherappcompose.data.FavCityModel
 import com.example.weatherappcompose.data.WeatherModel
 import com.example.weatherappcompose.screens.DialogSearch
-import com.google.android.material.tabs.TabLayout
 import org.json.JSONObject
 
 
@@ -44,6 +34,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppComposeTheme {
                 val navController = rememberNavController()
+                val favList = remember {
+                    mutableStateOf(listOf<FavCityModel>())
+                }
                 val daysList = remember {
                     mutableStateOf(listOf<WeatherModel>())
                 }
@@ -80,7 +73,14 @@ class MainActivity : ComponentActivity() {
                     daysList = daysList,
                     onClickSync = { getData("Kyiv", this@MainActivity, daysList, currDay) },
                     onClickSearch = { dialogState.value = true },
-                    onClickFav = { Unit }
+                    favList = favList,
+                    onClickFav = {
+                        val newFavCity = FavCityModel(currDay.value.city, currDay.value.currentTemp, currDay.value.conditionIcon)
+                        if (favList.value.none { it.city == newFavCity.city }) {
+                            favList.value += newFavCity
+                        }
+                    },
+                    onClickSearchFav = { cityName -> getData(cityName, this@MainActivity, daysList, currDay) },
                 )
                 }
             }
@@ -146,3 +146,4 @@ private fun getWeatherByDay(response: String) : List<WeatherModel> {
 
     return listWeatherModel
 }
+

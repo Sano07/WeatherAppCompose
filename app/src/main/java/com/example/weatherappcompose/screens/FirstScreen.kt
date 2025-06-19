@@ -101,6 +101,11 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                     style = TextStyle(fontSize = 25.sp),
                     color = Color.White
                 )
+                Text(
+                    text = "${currentDay.value.maxTemp.toFloat().toInt()}°/${currentDay.value.minTemp.toFloat().toInt()}°",
+                    style = TextStyle(fontSize = 25.sp),
+                    color = Color.White
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -118,11 +123,19 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                             tint = Color.White
                         )
                     }
-                    Text(
-                        text = "${currentDay.value.maxTemp.toFloat().toInt()}°/${currentDay.value.minTemp.toFloat().toInt()}°",
-                        style = TextStyle(fontSize = 25.sp),
-                        color = Color.White
+                    IconButton(
+                        onClick = {
+                            onClickFav.invoke()
+                        }
                     )
+                    {
+                        Icon(
+                            modifier = Modifier.size(25.dp),
+                            painter = painterResource(R.drawable.ic_favorite),
+                            contentDescription = "im_fav",
+                            tint = Color.White
+                        )
+                    }
                     IconButton(
                         onClick = {
                             onClickSync.invoke()
@@ -136,19 +149,6 @@ fun MainCardTemp(currentDay : MutableState<WeatherModel>, onClickSync: () -> Uni
                             tint = Color.White
                         )
 
-                    }
-                    IconButton(
-                        onClick = {
-                            onClickFav.invoke()
-                        }
-                    )
-                    {
-                        Icon(
-                            modifier = Modifier.size(25.dp),
-                            painter = painterResource(R.drawable.ic_favorite),
-                            contentDescription = "im_fav",
-                            tint = Color.White
-                        )
                     }
                 }
             }

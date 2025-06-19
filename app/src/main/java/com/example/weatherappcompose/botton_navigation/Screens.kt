@@ -1,9 +1,9 @@
 package com.example.weatherappcompose.botton_navigation
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import com.example.weatherappcompose.data.FavCityModel
 import com.example.weatherappcompose.data.WeatherModel
 import com.example.weatherappcompose.screens.MainCardTemp
 import com.example.weatherappcompose.screens.SavedLocation
@@ -26,8 +26,10 @@ fun FirstScreen(
 
 @Composable
 fun SecondScreen(
+    favList: MutableState<List<FavCityModel>>,
+    onClickSearchFav: (String) -> Unit,
 ) {
     Column {
-        SavedLocation()
+        SavedLocation(favList, onClickSearchFav)
     }
 }
